@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(38, 148, 199);
+}
+
+h1 {
+    color: white;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 50px;
+}
+
+main {
+    margin: 30px;
+}
+
+section {
+    margin: auto;
+    padding: 10px;
+}
+
+img {
+    width: 250px;
+    height: 110px;
+    margin: auto;
+    padding: 10px;
+    align-items: center;
+}
+
+@media(max-width:576px) {
+    img {
+        width: 100%;
+        height: auto;
+        margin: 10px 0 0;
+    }
+    main {
+        display: block;
+    }
+}
