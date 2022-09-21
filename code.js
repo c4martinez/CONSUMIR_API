@@ -5,8 +5,19 @@ const apikey = `&api_key=NFhUwhXQab72XmOC87XHrTfRbTKmP00l`;
 
 let q = "";
 urlCompleta ="";
+let pagina = 1;
 
-const boton = document.getElementById("boton");
+let observador = new IntersectionObserver((entradas, observador) => {
+    entradas.forEach(entradas => {
+        if(entradas.isIntersecting){
+            pagina++;
+            traerDestacados();
+        }
+    })
+}, {
+    rootMargin: '0px 0px 50px 0px',
+    threshold: 1.0
+})
 
 const traerDestacados = async () => {
     await fetch(api_url_trending).then ((Response) => {
@@ -20,8 +31,13 @@ const traerDestacados = async () => {
             document.getElementById("galeria").appendChild(gif);
         }
     })
+    const gifsEnPantalla = document.querySelectorAll('#galeria img');
+    let ultimoGif = gifsEnPantalla[gifsEnPantalla.length -1];
+    observador.observe(ultimoGif);
 }
 traerDestacados();
+
+const boton = document.getElementById("boton");
 
 boton.onclick = () => {
     document.getElementById('galeria').innerHTML = "";
@@ -29,6 +45,20 @@ boton.onclick = () => {
     urlCompleta = api_url_search + buscar + q + apikey;
     getData();
 }
+
+// agregamos scroll infinito a los gifs buscados
+
+let observador1 = new IntersectionObserver((entradas, observador) => {
+    entradas.forEach(entradas => {
+        if(entradas.isIntersecting){
+            pagina++;
+            getData();
+        }
+    })
+}, {
+    rootMargin: '0px 0px 50px 0px',
+    threshold: 1.0
+})
 
 const getData = async () => {
     await fetch(urlCompleta).then ((response) => {
@@ -40,6 +70,9 @@ const getData = async () => {
         const gif = document.createElement("img");
         gif.src = giphy.data[i].images["original"].url;
         document.getElementById("galeria").appendChild(gif);
-    }
+        }
     })
+    const gifsEnPantalla = document.querySelectorAll('#galeria img');
+    let ultimoGif = gifsEnPantalla[gifsEnPantalla.length -1];
+    observador.observe(ultimoGif);
 }
