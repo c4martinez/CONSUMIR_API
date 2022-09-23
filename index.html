@@ -11,13 +11,18 @@
 <main>
     <section>
         <h1>Giphy Explorer</h1>
-        <input type="search" class="Agregar-text" id="search" placeholder="ingresa tu busqueda">
-        <button type="button" class="button_buscar" id="boton">Buscar</button>
+        <form id="formulario">
+        <input type="search" class="Agregar-text" id="search" placeholder="ingresa tu busqueda" required>
+        <button type="submit" class="button_buscar" id="boton">Buscar</button>
+        </form>
+        <div id="listaActividades">
+        </div>
     </section>
     <div id="galeria">
         
     </div>
 </main>
-<script src="./code.js"></script>    
+<script src="./storage.js"></script>   
+<script src="./code.js"></script>
 </body>
 </html>
