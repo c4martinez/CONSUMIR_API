@@ -20,7 +20,10 @@ section {
     margin: auto;
     padding: 10px;
 }
-
+b.clickeable:hover {
+    color: #f3f3f3;
+    font-weight: bold;
+}
 img {
     width: 250px;
     height: 120px;

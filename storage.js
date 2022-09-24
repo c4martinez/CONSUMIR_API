@@ -23,20 +23,23 @@ const guardarDB = (actividad) => {
 const PintarDB = () => {
     listaActividadesUI.innerHTML = '';                           // Iniciar siempre con un string vacio(xq los vamos a ir pintando) cuando cargue nuestra aplicacion, limpia todo lo que aparece en listaActividades
     arrayActividades = JSON.parse(localStorage.getItem('busqueda'));
+    if(arrayActividades.length > 3){
+        arrayActividades.shift();                                // para que mi lista de busqueda se borre a partir de 3
+    }
     if(arrayActividades === null){
         arrayActividades = [];
     } else {
         arrayActividades.forEach(Element => {                    // este elemento es nuestro item
             listaActividadesUI.innerHTML += `
             <div>
-            <b>${Element.actividad}</b>
+            <b class="clickeable" onclick="submitValue('${Element.actividad}')">${Element.actividad}</b>
         </div>`
         });
     }
 } 
 // EventListener
 
-formularioUI.addEventListener('submit', (e)=> {
+formularioUI.addEventListener('submit', (e) => {
     e.preventDefault();                                          // para no refrescar el sitio
     let actividadUI = document.getElementById('search').value;   // leemos el input
     CrearItem(actividadUI);

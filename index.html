@@ -12,13 +12,14 @@
     <section>
         <h1>Giphy Explorer</h1>
         <form id="formulario">
-        <input type="search" class="Agregar-text" id="search" placeholder="ingresa tu busqueda" required>
+        <input type="search" class="Agregar-text" id="search" placeholder="ingresa tu busqueda">
+        <input type="hidden" class="Agregar-text" id="search2" placeholder="ingresa tu busqueda" value="">
         <button type="submit" class="button_buscar" id="boton">Buscar</button>
         </form>
         <div id="listaActividades">
         </div>
     </section>
-    <div id="galeria">
+    <div id="galeria" onclick="searchFunction()">
         
     </div>
 </main>

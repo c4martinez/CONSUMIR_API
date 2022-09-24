@@ -15,7 +15,7 @@ let observador = new IntersectionObserver((entradas, observador) => {
         }
     })
 }, {
-    rootMargin: '0px 0px 50px 0px',
+    rootMargin: '0px 0px 100px 0px',
     threshold: 1.0
 })
 
@@ -46,7 +46,11 @@ boton.onclick = () => {
     getData();
 }
 
-// agregamos scroll infinito a los gifs buscados
+boton.onclick = () => {
+    searchValue();
+}
+
+// agregamos scroll infinito
 
 let observador1 = new IntersectionObserver((entradas, observador) => {
     entradas.forEach(entradas => {
@@ -60,19 +64,44 @@ let observador1 = new IntersectionObserver((entradas, observador) => {
     threshold: 1.0
 })
 
-const getData = async () => {
-    await fetch(urlCompleta).then ((response) => {
-        return response.json();
-    }).then((giphy) => {
-        console.log(giphy);
+// traemos los resultados de la busqueda
 
-    for(let i = 0; i <giphy.data.length; i++){
-        const gif = document.createElement("img");
-        gif.src = giphy.data[i].images["original"].url;
-        document.getElementById("galeria").appendChild(gif);
-        }
-    })
-    const gifsEnPantalla = document.querySelectorAll('#galeria img');
-    let ultimoGif = gifsEnPantalla[gifsEnPantalla.length -1];
-    observador.observe(ultimoGif);
+const getData = async () => {
+    try{
+        await fetch(urlCompleta).then ((response) => {
+            return response.json();
+        }).then((giphy) => {
+            console.log(giphy);
+    
+        for(let i = 0; i <giphy.data.length; i++){
+            const gif = document.createElement("img");
+            gif.src = giphy.data[i].images["original"].url;
+            document.getElementById("galeria").appendChild(gif);
+            }
+        })
+        const gifsEnPantalla = document.querySelectorAll('#galeria img');
+        let ultimoGif = gifsEnPantalla[gifsEnPantalla.length -1];
+        observador.observe(ultimoGif);
+    }catch(e){
+        //alert("No hay resultados encontrados");
+        document.getElementById('galeria').innerHTML = "<b style='color:red'>No hay resultados encontrados</b>";
+    }
+}
+
+// Hacemos que la ultimas busquedas mostradas en pantalla, al hacerle click, vuelva a realizar la busqueda
+
+const submitValue = (search) => {
+    document.getElementById('search2').value = search;
+    searchValue();
+}
+
+const searchValue = () => {
+    document.getElementById('galeria').innerHTML = "";
+    q = document.getElementById('search').value;
+    if(q==""){
+        q = document.getElementById('search2').value;
+        document.getElementById('search').value = '';
+    }
+    urlCompleta = api_url_search + buscar + q + apikey;
+    getData();
 }
