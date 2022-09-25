@@ -13,7 +13,7 @@ let observador = new IntersectionObserver((entradas, observador) => {
     entradas.forEach(entradas => {
         if(entradas.isIntersecting){
             page++;
-            traerDestacados();
+            traerDestacados ();
         }
     })
 }, {
@@ -27,13 +27,14 @@ const traerDestacados = async () => {
         return Response.json();
     }).then((giphy) => {
         console.log(giphy);
-        
+
         for(let i = 0; i <giphy.data.length; i++){
             const gif = document.createElement("img");
             gif.src = giphy.data[i].images["original"].url;
             document.getElementById("galeria").appendChild(gif);
         }
     })
+    
     const gifsEnPantalla = document.querySelectorAll('#galeria img');
     let ultimoGif = gifsEnPantalla[gifsEnPantalla.length -1];
     observador.observe(ultimoGif);

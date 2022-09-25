@@ -16,7 +16,6 @@ h1 {
 }
 main {
     margin: 30px;
-    align-content: center;
 }
 section {
     margin: auto;
@@ -30,26 +29,28 @@ section {
 .Agregar-text{
     border-radius: 15px;
     border: 0;
-    height: 20px;
+    height: 30px;
     margin-bottom: 10px;
     text-align: center;
     cursor: pointer;
 }
 .button_buscar{
     width: 100px;
-    height: 20px;
+    height: 30px;
     font-weight: bold;
     color: white;
     background-color: orangered;
     border: 0;
     border-radius: 15px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 b.clickeable{
     background-color: #9e9797;
     color: rgb(1, 1, 17);
     border-radius: 5px;
     padding: 0 5px;
+    margin-top: 10px;
 }
 b.clickeable:hover {
     color: #f3f3f3;
@@ -57,7 +58,7 @@ b.clickeable:hover {
 }
 img {
     width: 250px;
-    height: 120px;
+    height: 170px;
     margin: auto;
     margin-top: 10px;
     padding: 10px;
