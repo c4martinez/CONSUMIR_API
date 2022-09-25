@@ -1,16 +1,18 @@
-const api_url_trending = `https://api.giphy.com/v1/gifs/trending?api_key=NFhUwhXQab72XmOC87XHrTfRbTKmP00l`;
+let offset = 0;
+
+const api_url_trending = `https://api.giphy.com/v1/gifs/trending?&api_key=NFhUwhXQab72XmOC87XHrTfRbTKmP00l&offset=${offset}`;
 const api_url_search = `https://api.giphy.com/v1/gifs/search`;
 let buscar = "?q=";
 const apikey = `&api_key=NFhUwhXQab72XmOC87XHrTfRbTKmP00l`;
 
 let q = "";
 urlCompleta ="";
-let pagina = 1;
+let page = 1;
 
 let observador = new IntersectionObserver((entradas, observador) => {
     entradas.forEach(entradas => {
         if(entradas.isIntersecting){
-            pagina++;
+            page++;
             traerDestacados();
         }
     })
@@ -20,11 +22,12 @@ let observador = new IntersectionObserver((entradas, observador) => {
 })
 
 const traerDestacados = async () => {
-    await fetch(api_url_trending).then ((Response) => {
+    await fetch(`https://api.giphy.com/v1/gifs/trending?&api_key=NFhUwhXQab72XmOC87XHrTfRbTKmP00l&offset=${offset}`)
+    .then ((Response) => {
         return Response.json();
     }).then((giphy) => {
         console.log(giphy);
-
+        
         for(let i = 0; i <giphy.data.length; i++){
             const gif = document.createElement("img");
             gif.src = giphy.data[i].images["original"].url;
@@ -35,6 +38,7 @@ const traerDestacados = async () => {
     let ultimoGif = gifsEnPantalla[gifsEnPantalla.length -1];
     observador.observe(ultimoGif);
 }
+
 traerDestacados();
 
 const boton = document.getElementById("boton");
@@ -70,6 +74,7 @@ const getData = async () => {
     try{
         await fetch(urlCompleta).then ((response) => {
             return response.json();
+            offset += 10;
         }).then((giphy) => {
             console.log(giphy);
     

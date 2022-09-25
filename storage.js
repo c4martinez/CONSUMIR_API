@@ -23,10 +23,10 @@ const guardarDB = (actividad) => {
 const PintarDB = () => {
     listaActividadesUI.innerHTML = '';                           // Iniciar siempre con un string vacio(xq los vamos a ir pintando) cuando cargue nuestra aplicacion, limpia todo lo que aparece en listaActividades
     arrayActividades = JSON.parse(localStorage.getItem('busqueda'));
-    if(arrayActividades.length > 3){
-        arrayActividades.shift();                                // para que mi lista de busqueda se borre a partir de 3
+    if (arrayActividades.length > 3) {
+        arrayActividades.shift();
     }
-    if(arrayActividades === null){
+    if (arrayActividades === null){
         arrayActividades = [];
     } else {
         arrayActividades.forEach(Element => {                    // este elemento es nuestro item
